@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP Display</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo" class="logo">
+        </div>
+        <button class="toggle-btn" id="toggleBtn" onclick="toggleSidebar()">&#x2190;</button>
+        <ul class="menu">
+            <li><a href="#" onclick="openPasswordPopup()">Password Tool</a></li>
+            <li><a href="https://public.cyber.mil/stigs/" target="_blank">STIG Resources</a></li>
+        </ul>
+        <div class="footer">
+            <a href="https://github.com/judsenb/PRTR-MFD-STIG-SOP/tree/main" target="_blank">Created by SrA Barnes</a>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content" id="main-content">
+        <h1>Standard Operating Procedure (SOP)</h1>
+        <div class="progress-container">
+            <label>STIG Progress:</label>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+        <h2>Printer Security Configuration</h2>
+        <p>This SOP provides guidelines for securing network-connected printers in accordance with DoD security policies. Please ensure to document all findings in STIG Manager.</p>
+        <div class="checklist">
+            <label><input type="checkbox" class="check-item"> Test Item</label>
+            <label><input type="checkbox" class="check-item"> Test Item</label>
+            <label><input type="checkbox" class="check-item"> Test Item</label>
+        </div>        
+        <div class="section">
+            <button class="collapsible">A collapsible section!</button>
+            <div class="content-section">
+                <h3>Test title</h3>
+                <p>This is just filler text for testing.</p>
+
+                <h3>Test title</h3>
+                <p>This is just filler text for testing.</p>
+
+                <div class="tip tip-green">✅ <strong>Tip:</strong> Friendly tip</div>
+                <div class="tip tip-yellow">⚠️ <strong>Important:</strong> Security Notice</div>
+                <div class="tip tip-red">❌ <strong>Warning:</strong> Warning test</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Popup -->
+    <div id="passwordPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePasswordPopup()">&times;</span>
+            <h2>Generate Printer Password</h2>
+            <label for="macInput">Enter MAC Address:</label>
+            <input type="text" id="macInput" placeholder="AA:BB:CC:DD:EE:FF">
+            <button onclick="generatePassword()">Generate</button>
+            <p id="generatedPassword"></p>
+        </div>
+    </div>
+
+</body>
+</html>
