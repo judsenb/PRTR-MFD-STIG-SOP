@@ -1,0 +1,286 @@
+/* General Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #1e1e1e;
+    height: 100vh;
+    position: fixed;
+    transition: width 0.3s ease-in-out;
+    border-right: 3px solid #00e1ff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Collapsed Sidebar */
+.sidebar.collapsed {
+    width: 40px;
+}
+
+.sidebar.collapsed .menu,
+.sidebar.collapsed .footer {
+    display: none;
+}
+
+.sidebar.collapsed .logo-container {
+    display: none;
+}
+
+/* Sidebar Logo (Centered) */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    border-bottom: 2px solid #00e1ff;
+}
+
+.logo {
+    width: 60px;
+    height: auto;
+    filter: drop-shadow(0px 0px 5px #00e1ff);
+}
+
+/* Sidebar Footer */
+.footer {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    color: #00e1ff;
+    background: #1a1a1a;
+}
+
+.footer a {
+    color: #00e1ff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer a:hover {
+    color: #00b3cc;
+    text-decoration: underline;
+}
+
+/* Sidebar Toggle Button */
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #00e1ff;
+    font-size: 24px;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+    transition: background 0.3s ease-in-out;
+}
+
+.toggle-btn:hover {
+    background: #00e1ff;
+    color: #121212;
+}
+
+.sidebar.collapsed .toggle-btn {
+    width: 40px;
+}
+
+/* Sidebar Menu */
+.menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.menu li {
+    width: 100%;
+}
+
+.menu li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+    font-weight: bold;
+    background: #252525;
+    transition: background 0.3s, color 0.3s;
+    border-left: 3px solid transparent;
+}
+
+.menu li a:hover {
+    background: #00e1ff;
+    color: #121212;
+    border-left: 3px solid #00e1ff;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: 40px;
+    width: calc(100% - 40px);
+}
+
+/* Collapsible Sections */
+.collapsible {
+    background: #00e1ff;
+    color: #121212;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.collapsible:hover {
+    background: #00b3cc;
+}
+
+.content-section {
+    display: none;
+    padding: 10px;
+    background: #1e1e1e;
+    border-left: 3px solid #00e1ff;
+}
+
+/* Tips (Red, Yellow, Green) */
+.tip {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    border-left: 5px solid;
+}
+
+.tip-green {
+    background: #003d00;
+    color: #a8ffa8;
+    border-left-color: #00ff00;
+}
+
+.tip-yellow {
+    background: #4d4d00;
+    color: #fffacd;
+    border-left-color: #ffcc00;
+}
+
+.tip-red {
+    background: #400000;
+    color: #ffb6b6;
+    border-left-color: #ff0000;
+}
+
+/* Popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #00e1ff;
+    box-shadow: 0px 0px 10px #00e1ff;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.close-btn {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+    color: #00e1ff;
+}
+
+.popup button {
+    background: #00e1ff;
+    color: #121212;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+}
+
+.popup button:hover {
+    background: #00b3cc;
+}
+/* Progress Bar */
+.progress-container {
+    margin: 20px 0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #00e1ff;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Styled Checkboxes */
+.checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+}
+
+.checklist label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.checklist input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    cursor: pointer;
+    appearance: none;
+    border: 2px solid #00e1ff;
+    border-radius: 4px;
+    transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+}
+
+.checklist input[type="checkbox"]:checked {
+    background: #00e1ff;
+    border-color: #00e1ff;
+}
+
+/* Remove default bullet points */
+.checklist label::before {
+    display: none;
+}
