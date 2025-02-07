@@ -27,41 +27,355 @@
 
     <!-- Main Content Area -->
     <div class="main-content" id="main-content">
-        <h1>Standard Operating Procedure (SOP)</h1>
-        <div class="progress-container">
-            <label>STIG Progress:</label>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+        <h1 class="section-header">SOP for Securing Printers and Multifunction Devices (MFDs)</h1>
+        <div class="section-container">
+            <h2 class="sub-section">Purpose</h2>
+            <p>This SOP provides detailed, step-by-step instructions to configure printers and MFDs in accordance with the Department of Defense (DoD) Security Technical Implementation Guide (STIG) requirements. The primary focus is on disabling SNMP to enhance security.</p>
+        </div>
+        
+        <div class="section-container">
+            <h2 class="sub-section">Scope</h2>
+            <p>This SOP applies to all printers and MFDs deployed within DoD environments.</p>
+        </div>
+        
+        <div class="section-container">
+            <h2 class="sub-section">Prerequisites</h2>
+            <p>Before proceeding, ensure the following requirements are met:</p>
+            <ul class="styled-list">
+                <li>Administrator access to the printer or MFD.</li>
+                <li>The device is connected to the network.</li>
+                <li>Access to the device's Embedded Web Server (EWS).</li>
+                <li>The latest firmware updates for the device.</li>
+            </ul>
+        </div>       
+        <div class="section">
+            <button class="collapsible">Lexmark STIG SOP</button>
+            <div class="content-section">
+                <div class="section-container">
+                    <h2 class="sub-section">Update the Firmware</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Access Lexmark’s firmware support page and enter your printer model to download the latest firmware update.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Open a web browser and enter the printer’s IP address. Navigate to <strong>Settings > Firmware Update</strong>, upload the downloaded firmware file, and click <strong>Update</strong>. Wait for the device to restart.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Verify the update by going to <strong>Reports > Device Settings Page</strong> and confirming the firmware version matches the latest update.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Disable SNMP (Simple Network Management Protocol)</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Open a web browser, enter the printer’s IP address, and log in with Administrator credentials.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Navigate to <strong>Settings > Network/Ports > SNMP</strong> and disable SNMP v1/v2 and SNMP v3.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Click <strong>Save</strong> to apply changes, then restart the printer.</p>
+                    <div class="tip tip-yellow">⚠️ <strong>Warning:</strong> Disabling SNMP prevents unauthorized remote monitoring.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Change Default Administrator Password</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Log into the printer’s web interface and navigate to <strong>Settings > Security > Admin Account</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Change the default admin password to the password generated using the password tool.</p>
+                    <div class="tip tip-green">✅ <strong>Tip:</strong> The password tool is located in the menu on the left.</div>
+                    <p class="step">Step 3:</p>
+                    <p>Click <strong>Save</strong> and log out. Log back in to verify the new credentials work.</p>
+                    <div class="tip tip-red">❌ <strong>Warning:</strong> Weak passwords make devices vulnerable to attacks.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Disable Unused Network Protocols</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Network/Ports</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Disable the following protocols:</p>
+                    <ul class="styled-list">
+                        <li>Raw TCP/IP Printing (Port 9100)</li>
+                        <li>LPD Printing</li>
+                        <li>AppleTalk</li>
+                        <li>FTP Printing</li>
+                        <li>Telnet Access</li>
+                        <li>Google Cloud Print (if available)</li>
+                        <li>IPP/IPPS (if not required)</li>
+                    </ul>
+                    <p class="step">Step 3:</p>
+                    <p>Ensure <strong>HTTPS</strong> is enabled for secure management. Click <strong>Save</strong> and restart the printer.</p>
+                    <div class="tip tip-green">✅ <strong>Tip:</strong> Disabling unused protocols reduces attack surfaces.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Restrict Remote Access and IP Range</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Access Control</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Configure a list of approved IP addresses that can access the device and block all untrusted external IP addresses.</p>
+                    <p class="step">Step 3:</p>
+                    <p>If remote access is unnecessary, disable remote web access. Click <strong>Save</strong>.</p>
+                    <div class="tip tip-yellow">⚠️ <strong>Warning:</strong> Allowing open remote access can lead to unauthorized control of the printer.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Upload Certificates</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Locate the required certificates on your local machine or shared drive.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Open a web browser and enter the printer’s IP address to access the Embedded Web Server (EWS).</p>
+                    <p class="step">Step 3:</p>
+                    <p>Navigate to <strong>Settings > Security > Certificate Management</strong>.</p>
+                    <p class="step">Step 4:</p>
+                    <p>Click <strong>Import</strong> and select the certificate file to upload.</p>
+                    <p class="step">Step 5:</p>
+                    <p>Repeat for all required certificates.</p>
+                    <p class="step">Step 6:</p>
+                    <p>Click <strong>Apply</strong> and restart the printer to activate the certificates.</p>
+                    <div class="tip tip-green">✅ <strong>Tip:</strong> Ensure all certificates are properly installed to avoid authentication errors.</div>
+                </div>
+
+                <div class="section-container">
+                    <h2 class="sub-section">Enable Audit Logging and Review Logs</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Audit Log</strong> and enable logging for all events.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Configure logs to send to a remote SIEM or Syslog server (if available).</p>
+                    <p class="step">Step 3:</p>
+                    <p>Go to <strong>Reports > Audit Logs</strong>, export logs, and review them weekly for suspicious activity.</p>
+                    <div class="tip tip-green">✅ <strong>Tip:</strong> Regular log reviews help detect security threats early.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Secure Print Jobs and Hard Drive Data</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Confidential Print</strong> and enable Secure Print Mode. Require users to enter a PIN code to release print jobs.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Go to <strong>Settings > Security > Hard Disk Protection</strong> and enable Disk Encryption. Set automatic data wiping between print jobs.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Click <strong>Save</strong> and restart the printer.</p>
+                    <div class="tip tip-red">❌ <strong>Warning:</strong> Without encryption, sensitive print data may be recovered.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Restrict USB and Physical Ports</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Port Access</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Disable unused ports, including USB Printing and Fax over IP (if not required).</p>
+                    <p class="step">Step 3:</p>
+                    <p>Click <strong>Save</strong> and restart the printer.</p>
+                    <div class="tip tip-yellow">⚠️ <strong>Warning:</strong> Open USB ports can allow unauthorized data transfer.</div>
+                </div>                
+        </div>
+        <div class="section">
+            <button class="collapsible">HP STIG SOP</button>
+            <div class="content-section">
+                <div class="section-container">
+                    <h2 class="sub-section">Update Firmware</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to HP's support page, enter your printer model, and download the latest firmware.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Open a web browser and enter the printer’s IP address to access the Embedded Web Server (EWS).</p>
+                    <p class="step">Step 3:</p>
+                    <p>Navigate to <strong>General > Firmware Upgrade</strong>, upload the downloaded firmware file, and initiate the update.</p>
+                    <p class="step">Step 4:</p>
+                    <p>Allow the device to restart upon completion.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Disable SNMP</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Open a web browser, enter the printer’s IP address, and access the EWS.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Navigate to <strong>Networking > Advanced Settings > SNMP Configuration</strong>.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Set <strong>SNMP v1/v2c</strong> and <strong>SNMP v3</strong> to Disabled.</p>
+                    <p class="step">Step 4:</p>
+                    <p>Click <strong>Apply</strong> to confirm, then restart the printer.</p>
+                    <div class="tip tip-yellow">⚠️ <strong>Note:</strong> Some HP models may not allow SNMP to be disabled via EWS. Consider blocking SNMP traffic via network tools or consult HP support.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Change Default Administrator Password</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Log into the EWS and navigate to <strong>Settings > Security > Device Password</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Change the default admin password to the password generated using the password tool.</p>
+                    <div class="tip tip-green">✅ <strong>Tip:</strong> The password tool is located in the menu on the left.</div>
+                    <p class="step">Step 3:</p>
+                    <p>Click <strong>Apply</strong> and log out. Log back in to verify the new credentials.</p>
+                    <div class="tip tip-red">❌ <strong>Warning:</strong> Weak passwords increase security risks.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Disable Unused Network Protocols</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Networking > Advanced Settings > Protocols</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Disable the following protocols:</p>
+                    <ul class="styled-list">
+                        <li>Raw IP Printing (Port 9100)</li>
+                        <li>LPD Printing</li>
+                        <li>FTP Printing</li>
+                        <li>Telnet</li>
+                        <li>SLP</li>
+                        <li>AppleTalk</li>
+                        <li>Web Services Print</li>
+                    </ul>
+                    <p class="step">Step 3:</p>
+                    <p>Ensure <strong>HTTPS</strong> is enabled for secure communication. Click <strong>Apply</strong> to save changes.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Upload Certificates</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Locate the required certificates on your local machine or shared drive.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Open a web browser and enter the printer’s IP address to access the Embedded Web Server (EWS).</p>
+                    <p class="step">Step 3:</p>
+                    <p>Navigate to <strong>Settings > Security > Certificate Management</strong>.</p>
+                    <p class="step">Step 4:</p>
+                    <p>Click <strong>Import</strong> and select the certificate file to upload.</p>
+                    <p class="step">Step 5:</p>
+                    <p>Repeat for all required certificates.</p>
+                    <p class="step">Step 6:</p>
+                    <p>Click <strong>Apply</strong> and restart the printer to activate the certificates.</p>
+                    <div class="tip tip-green">✅ <strong>Tip:</strong> Ensure all certificates are properly installed to avoid authentication errors.</div>
+                </div>
+
+                <div class="section-container">
+                    <h2 class="sub-section">Configure Access Control Lists (ACLs)</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Access Control</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Specify allowed IP addresses or ranges and deny all other external access.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Click <strong>Apply</strong> to confirm changes.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Enable Audit Logging</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Audit Logging</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Enable logging and set the log level to capture all relevant events.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Specify a remote syslog server if available. Click <strong>Apply</strong> to save settings.</p>
+                    <div class="tip tip-green">✅ <strong>Tip:</strong> Regular log reviews help detect security threats early.</div>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Secure Stored Data</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Secure Storage Erase</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Set the erase mode to <strong>Secure Fast Erase</strong> or <strong>Secure Sanitizing Erase</strong>.</p>
+                    <p class="step">Step 3:</p>
+                    <p>If supported, enable <strong>Hard Disk Encryption</strong>. Click <strong>Apply</strong> to save settings.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Restrict Physical Port Access</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Navigate to <strong>Settings > Security > Port Access</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Disable unused physical ports, such as USB and parallel ports.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Click <strong>Apply</strong> to save changes.</p>
+                    <div class="tip tip-yellow">⚠️ <strong>Warning:</strong> Open physical ports can allow unauthorized data access.</div>
+                </div>                
+        </div>
+        <div class="section">
+            <button class="collapsible">Completing STIG Checklist on STIG Manager</button>
+            <div class="content-section">
+                <div class="section-container">
+                    <h2 class="sub-section">Log into STIG Manager</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Open your web browser and navigate to <strong><a href="https://rkmf-as-stig01v/stigman/" target="_blank">STIG Manager</a></strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Enter your administrator credentials to access the STIG Manager dashboard.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Select the Appropriate Collection</h2>
+                    <p class="step">Step 1:</p>
+                    <p>In the Navigation Tree on the left panel, locate and select the collection named <strong>"Other"</strong>.</p>
+                    <p class="step">Step 2:</p>
+                    <p>This will open the Collection Dashboard in the main content area.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Access the Assets Tab</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Within the Collection Dashboard, click on the <strong>Assets</strong> tab to view the list of assets associated with this collection.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Manage Inventory</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Click on the <strong>Manage</strong> button next to the Inventory section.</p>
+                    <p class="step">Step 2:</p>
+                    <p>This will open the <strong>Assets Management</strong> interface, where you can add or modify assets.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Create a New Asset</h2>
+                    <p class="step">Step 1:</p>
+                    <p>In the <strong>Assets Management</strong> interface, click on the <strong>Create</strong> button to add a new asset.</p>
+                    <p class="step">Step 2:</p>
+                    <p>A form will appear, prompting you to enter details about the device.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Enter Asset Details</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Fill in the following information:</p>
+                    <ul class="styled-list">
+                        <li><strong>Name:</strong> Input the device's MAC address. This serves as a unique identifier for the asset.</li>
+                        <li><strong>FQDN:</strong> If available, enter the device's Fully Qualified Domain Name as registered on the print server.</li>
+                        <li><strong>IP Address:</strong> Input the device's IP address.</li>
+                        <li><strong>MAC Address:</strong> Re-enter the device's MAC address to ensure accuracy.</li>
+                    </ul>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Assign the Appropriate STIG</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Under the <strong>STIG Assignment</strong> section, assign the <strong>Multifunction Device and Network Printers STIG</strong> to the asset.</p>
+                    <p class="step">Step 2:</p>
+                    <p>This ensures that the correct security guidelines are applied during the assessment.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Save the Asset</h2>
+                    <p class="step">Step 1:</p>
+                    <p>After entering all necessary information, click on the <strong>Save</strong> or <strong>Create</strong> button to add the asset to the collection.</p>
+                </div>
+                
+                <div class="section-container">
+                    <h2 class="sub-section">Access and Complete the STIG Checklist</h2>
+                    <p class="step">Step 1:</p>
+                    <p>Return to the <strong>Assets</strong> tab in the Collection Dashboard.</p>
+                    <p class="step">Step 2:</p>
+                    <p>Locate and select the device you just added.</p>
+                    <p class="step">Step 3:</p>
+                    <p>Open the associated Checklist for the device.</p>
+                    <p class="step">Step 4:</p>
+                    <p>Proceed to complete the checklist by evaluating each control item and documenting compliance status, findings, and any necessary remediation actions.</p>
+                </div>                
             </div>
         </div>
-        <h2>Printer Security Configuration</h2>
-        <p>This SOP provides guidelines for securing network-connected printers in accordance with DoD security policies. Please ensure to document all findings in STIG Manager.</p>
-        <div class="checklist">
-            <label><input type="checkbox" class="check-item"> Test Item</label>
-            <label><input type="checkbox" class="check-item"> Test Item</label>
-            <label><input type="checkbox" class="check-item"> Test Item</label>
-        </div>        
         <div class="section">
-            <button class="collapsible">A collapsible section!</button>
+            <button class="collapsible">Scan to Email Setup</button>
             <div class="content-section">
                 <h3>Test title</h3>
-                <p>This is just filler text for testing.</p>
-
-                <h3>Test title</h3>
-                <p>This is just filler text for testing.</p>
-
-                <div class="tip tip-green">✅ <strong>Tip:</strong> Friendly tip</div>
-                <div class="tip tip-yellow">⚠️ <strong>Important:</strong> Security Notice</div>
-                <div class="tip tip-red">❌ <strong>Warning:</strong> Warning test</div>
+                
             </div>
         </div>
     </div>
-
     <!-- Password Popup -->
     <div id="passwordPopup" class="popup">
         <div class="popup-content">
             <span class="close-btn" onclick="closePasswordPopup()">&times;</span>
-            <h2>Generate Printer Password</h2>
+            <h2>Password Tool</h2>
             <label for="macInput">Enter MAC Address:</label>
             <input type="text" id="macInput" placeholder="AA:BB:CC:DD:EE:FF">
             <button onclick="generatePassword()">Generate</button>
